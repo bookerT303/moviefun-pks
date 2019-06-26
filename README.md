@@ -21,12 +21,12 @@ and then adding instructions from the lab.
 
 ## Buid the docker image
 ```
-docker build -t bdavidson/moviefun-pks:1.0 .
+docker build -t pivotaleducation/moviefun-pks:1.0 .
 ```
 
 ## Run the docker image
 ```
-docker run -p 8080:8080 -t bdavidson/moviefun-pks:1.0
+docker run -p 8080:8080 -t pivotaleducation/moviefun-pks:1.0
 ```
 
 # Verify it
@@ -39,6 +39,18 @@ open http://localhost:8080/moviefun
 ```
 MOVIE_FUN_URL=http://localhost:8080/moviefun mvn test
 ```
+
+# Publish the docker image
+```
+docker login
+```
+1password has the Education Dockerhub credentials
+
+```
+docker push pivotaleducation/moviefun-pks:1.0
+```
+
+Make sure that is public on docker hub or it cannot be pulled.
 
 # Clean up
 ```
@@ -55,3 +67,44 @@ Remove the container
 ```
 docker container rm <CONTAINER ID>
 ```
+
+Remove the image
+```
+docker image rm pivotaleducation/moviefun-pks:1.0
+```
+
+# Kubernetes
+```
+pks login -a  https://api.pks.west.aws.pcfninja.com:9021 -u paladmin@pivotal.io -k
+```
+
+```
+pks get-creditials paldemo1
+```
+
+```
+kubectl delete deployment moviefun-pks-bcd
+```
+
+```
+kubectl apply -f moviefun-pks.yaml
+kubectl apply -f moviefun-pks-lb.yaml
+```
+
+```
+kubectl get pods
+```
+get the pod name of the deployment
+
+```
+kubectl port-forward <pod name> 8080:8080
+```
+Not public but you have access to your application
+
+[Movie Fun on PKS](http://localhost:8080/moviefun)
+
+```
+kubectl logs -f <pod name>
+```
+
+

@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviefun-pks-bcd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moviefun-pks-bcd
+  template:
+    metadata:
+      labels:
+        app: moviefun-pks-bcd
+    spec:
+      containers:
+      - name: moviefun-pks-bcd
+        image: pivotaleducation/moviefun-pks:2.0
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: SPRING_H2_CONSOLE_SETTINGS_WEB_ALLOW_OTHERS
+          value: "true"
+        ports:
+        - containerPort: 8080

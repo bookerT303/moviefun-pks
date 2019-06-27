@@ -29,19 +29,20 @@ RUN set -xe \
 
 
 RUN set -x \
-	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.1.0/apache-tomee-7.1.0-plus.tar.gz.asc -o tomee.tar.gz.asc \
-	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.1.0/apache-tomee-7.1.0-plus.tar.gz -o tomee.tar.gz \
-    && gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
+	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.0.2/apache-tomee-7.0.2-webprofile.tar.gz.asc -o tomee.tar.gz.asc \
+	&& curl -fSL https://repo.maven.apache.org/maven2/org/apache/tomee/apache-tomee/7.0.2/apache-tomee-7.0.2-webprofile.tar.gz -o tomee.tar.gz \
+	&& gpg --batch --verify tomee.tar.gz.asc tomee.tar.gz \
 	&& tar -zxf tomee.tar.gz \
-	&& mv apache-tomee-plus-7.1.0/* /usr/local/tomee \
-	&& rm -Rf apache-tomee-plus-7.1.0 \
-    && rm -rf /usr/local/tomee/webapps/* \
-    && rm -rf /usr/local/tomee/data/* \
+	&& mv apache-tomee-webprofile-7.0.2/* /usr/local/tomee \
+	&& rm -Rf apache-tomee-webprofile-7.0.2 \
 	&& rm bin/*.bat \
-	&& rm tomee.tar.gz*
+	&& rm tomee.tar.gz* \
+    && rm -rf /usr/local/tomee/webapps/* \
+    && rm -rf /usr/local/tomee/data/*
 
 COPY target/moviefun.war /usr/local/tomee/webapps/moviefun.war
 
 EXPOSE 8080
-CMD ["catalina.sh", "run"]
-
+EXPOSE 5005
+ENV JPDA_ADDRESS "5005"
+CMD ["catalina.sh", "jpda", "run"]

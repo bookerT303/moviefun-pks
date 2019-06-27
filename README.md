@@ -15,7 +15,7 @@ See the [tomitribe docker github](https://github.com/tomitribe/docker-tomee)
 
 We are starting with:
 ```
-https://github.com/tomitribe/docker-tomee/blob/master/8-jre-7.1.0-plus/Dockerfile
+https://raw.githubusercontent.com/tomitribe/docker-tomee/master/8-jre-7.0.2-webprofile/Dockerfile
 ```
 and then adding instructions from the lab.
 
@@ -27,6 +27,11 @@ docker build -t pivotaleducation/moviefun-pks:1.0 .
 ## Run the docker image
 ```
 docker run -p 8080:8080 -t pivotaleducation/moviefun-pks:1.0
+```
+
+For remote debugging by intellij using debug port 5005:
+```
+docker run -p 5005:5005 -p 8080:8080 -t pivotaleducation/moviefun-pks:1.0
 ```
 
 # Verify it
@@ -79,11 +84,14 @@ pks login -a  https://api.pks.west.aws.pcfninja.com:9021 -u paladmin@pivotal.io 
 ```
 
 ```
-pks get-creditials paldemo1
+pks get-credentials paldemo1
 ```
 
 ```
 kubectl delete deployment moviefun-pks-bcd
+```
+```
+kubectl run moviefun-pks-bcd --image=pivotaleducation/moviefun-pks:1.0 --replicas=1
 ```
 
 ```
@@ -107,4 +115,8 @@ Not public but you have access to your application
 kubectl logs -f <pod name>
 ```
 
+Public access will eventually work
+`http://paltracker.pks.west.aws.pcfninja.com/moviefun`
 
+Not very useful but its a shell on the container
+kubectl exec -it <pod name> -- /bin/bash

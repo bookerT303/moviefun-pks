@@ -25,7 +25,7 @@
 <html lang="${language}">
 <head>
   <meta charset="utf-8">
-  <title>Moviefun</title>
+  <title>${PageTitle}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -49,8 +49,8 @@
     <div class="container">
       <a class="btn btn-navbar" data-toggle="collapse"
          data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-          class="icon-bar"></span> <span class="icon-bar"></span>
-      </a> <a class="brand" href="#">Moviefun</a>
+              class="icon-bar"></span> <span class="icon-bar"></span>
+      </a> <a class="brand" href="#">${PageTitle}</a>
       <!--/.nav-collapse -->
     </div>
   </div>
@@ -58,7 +58,7 @@
 
 <div class="container">
 
-  <h1>Moviefun</h1>
+  <h1>${PageTitle}</h1>
 
   <p>Please select one of the following links:</p>
   <a href="../setup">Setup</a> - Sets up the application with some sample data<br/>

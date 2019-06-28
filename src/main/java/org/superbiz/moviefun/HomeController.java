@@ -1,5 +1,6 @@
 package org.superbiz.moviefun;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -9,13 +10,17 @@ import java.util.Map;
 public class HomeController {
 
     private final MoviesBean moviesBean;
+    private String pageTitle;
 
-    public HomeController(MoviesBean moviesBean) {
+    public HomeController(MoviesBean moviesBean,
+        @Value("${moviefun.title:Moviefun}") String pageTitle) {
         this.moviesBean = moviesBean;
+        this.pageTitle = pageTitle;
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index(Map<String, Object> model) {
+        model.put("PageTitle", pageTitle);
         return "index";
     }
 
@@ -30,6 +35,7 @@ public class HomeController {
         moviesBean.addMovie(new Movie("Shanghai Noon", "Tom Dey", "Comedy", 7, 2000));
 
         model.put("movies", moviesBean.getMovies());
+        model.put("PageTitle", pageTitle);
 
         return "setup";
     }

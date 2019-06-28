@@ -18,6 +18,7 @@ package org.superbiz.moviefun;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -41,6 +42,9 @@ public class ActionServlet extends HttpServlet {
     @Autowired
     private MoviesBean moviesBean;
 
+    @Value("${moviefun.title:Moviefun}")
+    private String pageTitle;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         process(request, response);
@@ -56,7 +60,7 @@ public class ActionServlet extends HttpServlet {
 
         if ("Add".equals(action)) {
 
-            String title = request.getParameter("title");
+            String title = request.getParameter("pageTitle");
             String director = request.getParameter("director");
             String genre = request.getParameter("genre");
             int rating = Integer.parseInt(request.getParameter("rating"));
@@ -123,6 +127,7 @@ public class ActionServlet extends HttpServlet {
 
             int end = start + range.size();
 
+            request.setAttribute("PageTitle", pageTitle);
             request.setAttribute("count", count);
             request.setAttribute("start", start + 1);
             request.setAttribute("end", end);

@@ -16,9 +16,11 @@ spec:
       containers:
       - name: moviefun-pks-bcd
         image: pivotaleducation/moviefun-pks:2.0
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: SPRING_H2_CONSOLE_SETTINGS_WEB_ALLOW_OTHERS
           value: "true"
+        - name: MOVIEFUN_TITLE
+          value: "MyMovieFun"
         ports:
         - containerPort: 8080

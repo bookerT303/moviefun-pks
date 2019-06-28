@@ -109,3 +109,6 @@ Public access will eventually work
 
 Not very useful but its a shell on the container
 kubectl exec -it <pod name> -- /bin/bash
+
+
+ConfigMap - https://dzone.com/articles/configuring-spring-boot-on-kubernetes-with-configm

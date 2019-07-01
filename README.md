@@ -112,3 +112,5 @@ kubectl exec -it <pod name> -- /bin/bash
 
 
 ConfigMap - https://dzone.com/articles/configuring-spring-boot-on-kubernetes-with-configm
+Secrets - https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
+https://dzone.com/articles/configuring-spring-boot-on-kubernetes-with-secrets

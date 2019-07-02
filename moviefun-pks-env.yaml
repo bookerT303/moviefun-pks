@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviefun-pks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moviefun-pks
+  template:
+    metadata:
+      labels:
+        app: moviefun-pks
+    spec:
+      containers:
+        - name: moviefun-pks
+          image: pivotaleducation/moviefun-pks:2.0
+          imagePullPolicy: Always
+          env:
+            - name: MOVIEFUN_TITLE
+              value: "MyMovieFun"
+            - name: spring.datasource.url
+              value: "jdbc:postgresql://raja.db.elephantsql.com:5432/nazpwsgm"
+            - name: spring.datasource.username
+              value: "nazpwsgm"
+            - name: spring.datasource.password
+              value: "akglgDsdH05dy41TM0HHonJWeovT0oEQ"
+            - name: spring.jpa.properties.hibernate.dialect
+              value: "org.hibernate.dialect.PostgreSQL95Dialect"
+            - name: spring.datasource.driverClassName
+              value: "org.postgresql.Driver"
+            - name: spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation
+              value: "true"
+          ports:
+            - containerPort: 8080

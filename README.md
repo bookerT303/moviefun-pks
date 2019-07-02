@@ -76,11 +76,11 @@ pks get-creditials paldemo1
 ```
 
 ```
-kubectl delete deployment moviefun-pks-bcd
+kubectl delete deployment moviefun-pks
 ```
 
 ```
-kubectl run moviefun-pks-bcd --image=pivotaleducation/moviefun-pks:2.0 --replicas=1
+kubectl run moviefun-pks --image=pivotaleducation/moviefun-pks:2.0 --replicas=1
 ```
 OR
 ```

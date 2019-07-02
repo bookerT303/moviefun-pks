@@ -15,12 +15,7 @@ spec:
     spec:
       containers:
       - name: moviefun-pks
-        image: pivotaleducation/moviefun-pks:1.0
-        imagePullPolicy: IfNotPresent
-        env:
-        - name: JPDA_ADDRESS
-          value: "5005"
+        image: pivotaleducation/moviefun-pks:2.0
+        imagePullPolicy: Always
         ports:
-        - containerPort: 5005
         - containerPort: 8080
-

@@ -2,25 +2,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: moviefun-pks-bcd
+  name: moviefun-pks
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: moviefun-pks-bcd
+      app: moviefun-pks
   template:
     metadata:
       labels:
-        app: moviefun-pks-bcd
+        app: moviefun-pks
     spec:
       containers:
-      - name: moviefun-pks-bcd
-        image: pivotaleducation/moviefun-pks:2.0
-        imagePullPolicy: Always
-        env:
-        - name: SPRING_H2_CONSOLE_SETTINGS_WEB_ALLOW_OTHERS
-          value: "true"
-        - name: MOVIEFUN_TITLE
-          value: "MyMovieFun"
-        ports:
-        - containerPort: 8080
+        - name: moviefun-pks
+          image: pivotaleducation/moviefun-pks:2.0
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: moviefun-pks-config
+            - secretRef:
+                name: moviefun-pks-secret
+          env:
+            - name: MOVIEFUN_TITLE
+              value: "MyMovieFun"
+#            - name: spring.datasource.username
+#              valueFrom:
+#                secretKeyRef:
+#                  name: moviefun-pks-secret
+#                  key: spring.datasource.username
+#            - name: spring.datasource.password
+#              valueFrom:
+#                secretKeyRef:
+#                  name: moviefun-pks-secret
+#                  key: spring.datasource.password
+          ports:
+            - containerPort: 8080

@@ -14,16 +14,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 --%>
-<%@ page import=" org.superbiz.moviefun.Movie" %>
-<%@ page import="javax.naming.InitialContext" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%
-  InitialContext initialContext = new InitialContext();
-%>
 <c:set var="language" value="${pageContext.request.locale}"/>
 <fmt:setLocale value="${language}"/>
 
@@ -82,6 +75,24 @@
       </tr>
     </c:forEach>
   </table>
+
+  <h2>Seeded Database with the Following albums</h2>
+  <table width="500">
+    <tr>
+      <td><b>Title</b></td>
+      <td><b>Artist</b></td>
+      <td><b>Year</b></td>
+    </tr>
+
+    <c:forEach items="${requestScope.albums}" var="album">
+      <tr>
+        <td> ${album.title} </td>
+        <td> ${album.artist} </td>
+        <td> ${album.year} </td>
+      </tr>
+    </c:forEach>
+  </table>
+
 
   <h2>Continue</h2>
   <a href="moviefun">Go to main app</a>

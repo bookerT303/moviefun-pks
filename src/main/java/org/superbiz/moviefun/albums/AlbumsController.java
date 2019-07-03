@@ -1,6 +1,7 @@
 package org.superbiz.moviefun.albums;
 
 import org.apache.tika.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,22 +26,27 @@ public class AlbumsController {
 
     private final AlbumsBean albumsBean;
     private final BlobStore blobStore;
+    private String pageTitle;
 
-    public AlbumsController(AlbumsBean albumsBean, BlobStore blobStore) {
+    public AlbumsController(AlbumsBean albumsBean, BlobStore blobStore,
+            @Value("${moviefun.title:Moviefun}") String pageTitle) {
         this.albumsBean = albumsBean;
         this.blobStore = blobStore;
+        this.pageTitle = pageTitle;
     }
 
 
     @GetMapping
     public String index(Map<String, Object> model) {
         model.put("albums", albumsBean.getAlbums());
+        model.put("PageTitle", pageTitle);
         return "albums";
     }
 
     @GetMapping("/{albumId}")
     public String details(@PathVariable long albumId, Map<String, Object> model) {
         model.put("album", albumsBean.find(albumId));
+        model.put("PageTitle", pageTitle);
         return "albumDetails";
     }
 
@@ -64,10 +70,10 @@ public class AlbumsController {
         Optional<Blob> maybeCoverBlob = blobStore.get(getCoverBlobName(albumId));
         Blob coverBlob = maybeCoverBlob.orElseGet(this::buildDefaultCoverBlob);
 
-        byte[] imageBytes = IOUtils.toByteArray(coverBlob.inputStream);
+        byte[] imageBytes = IOUtils.toByteArray(coverBlob.getInputStream());
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType(coverBlob.contentType));
+        headers.setContentType(MediaType.parseMediaType(coverBlob.getContentType()));
         headers.setContentLength(imageBytes.length);
 
         return new HttpEntity<>(imageBytes, headers);

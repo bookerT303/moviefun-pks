@@ -10,12 +10,12 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: moviefun-pks-local-storage
   local:
-    path: /mnt/disk/vol1
+    path: /mnt/disk/moviefun
   nodeAffinity:
     required:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: app
+        - key: kubernetes.io/hostname
           operator: In
           values:
-          - moviefun-pks
+          - 1e00801a-4a51-4672-9aa6-943df1b23043

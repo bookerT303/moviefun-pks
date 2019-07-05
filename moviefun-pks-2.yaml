@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviefun-pks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moviefun-pks
+  template:
+    metadata:
+      labels:
+        app: moviefun-pks
+    spec:
+      containers:
+        - name: moviefun-pks
+          image: pivotaleducation/moviefun-pks:2.0
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: moviefun-pks-config
+            - secretRef:
+                name: moviefun-pks-secret
+          env:
+            - name: MOVIEFUN_TITLE
+              value: "MyMovieFun"
+            - name: moviefun-pks-config
+              value: /mnt/disk/moviefun
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: moviefun-pks-persistent-storage
+              mountPath: "/mnt/disk/moviefun"
+      volumes:
+      - name: moviefun-pks-persistent-storage
+        persistentVolumeClaim:
+          claimName: moviefun-pks-claim

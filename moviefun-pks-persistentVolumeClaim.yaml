@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: moviefun-pks-local-storage
+  storageClassName: thin
   resources:
     requests:
       storage: 1Gi

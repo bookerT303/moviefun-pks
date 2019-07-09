@@ -2,38 +2,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: moviefun-pks
+  name: moviefun-pks-msg
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: moviefun-pks
+      app: moviefun-pks-msg
   template:
     metadata:
       labels:
-        app: moviefun-pks
+        app: moviefun-pks-msg
     spec:
       containers:
-        - name: moviefun-pks
+        - name: moviefun-pks-msg
           image: pivotaleducation/moviefun-pks:2.0
-          imagePullPolicy: Always
           envFrom:
-            - configMapRef:
-                name: moviefun-pks-config
             - secretRef:
-                name: moviefun-pks-secret
-          env:
-            - name: MOVIEFUN_TITLE
-              value: "MyMovieFun"
-#            - name: spring.datasource.username
-#              valueFrom:
-#                secretKeyRef:
-#                  name: moviefun-pks-secret
-#                  key: spring.datasource.username
-#            - name: spring.datasource.password
-#              valueFrom:
-#                secretKeyRef:
-#                  name: moviefun-pks-secret
-#                  key: spring.datasource.password
+                name: moviefun-pks-secret-msg
           ports:
             - containerPort: 8080
+          volumeMounts:
+          - mountPath: "/var/albumCovers"
+            name: some-disk
+      volumes:
+        - name: some-disk
+          persistentVolumeClaim:
+            claimName: moviefun-claim

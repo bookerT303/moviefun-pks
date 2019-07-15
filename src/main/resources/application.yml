@@ -17,3 +17,6 @@ spring:
     console:
       enabled: true
 
+moviefun:
+  storage:
+    directory: /var/albumCovers

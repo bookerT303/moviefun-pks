@@ -47,13 +47,9 @@ public class MoviesBean {
     }
 
     @Transactional
-    public void deleteMovie(Movie movie) {
-        entityManager.remove(movie);
-    }
-
     public void deleteMovieId(long id) {
         Movie movie = entityManager.find(Movie.class, id);
-        deleteMovie(movie);
+        entityManager.remove(movie);
     }
 
     public List<Movie> getMovies() {

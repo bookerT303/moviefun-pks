@@ -30,9 +30,9 @@ spec:
           ports:
             - containerPort: 8080
           volumeMounts:
-            - name: moviefun-pks-persistent-storage
-              mountPath: "/mnt/disk/moviefun"
+            - mountPath: "/var/albumCovers"
+              name: album-covers-disk
       volumes:
-      - name: moviefun-pks-persistent-storage
+      - name: album-covers-disk
         persistentVolumeClaim:
           claimName: moviefun-pks-claim

@@ -1,5 +1,6 @@
 package org.superbiz.moviefun;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -19,8 +20,10 @@ public class Application {
         return new ServletRegistrationBean(actionServlet, "/moviefun/*");
     }
 
+    @Value("${moviefun.storage.directory:/var/albumCovers}")
+    private String albumsDirectory;
     @Bean
     public BlobStore blobStore() {
-        return new FileStore();
+        return new FileStore(albumsDirectory);
     }
 }

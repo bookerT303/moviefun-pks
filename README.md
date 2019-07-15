@@ -70,9 +70,17 @@ docker image rm pivotaleducation/moviefun-pks:2.0
 ```
 pks login -a  https://api.pks.west.aws.pcfninja.com:9021 -u paladmin@pivotal.io -k
 ```
+OR
+```
+pks login -a https://api.run.haas-208.pez.pivotal.io -k -u brad
+```
 
 ```
 pks get-creditials paldemo1
+```
+OR
+```
+pks get-creditials public
 ```
 
 ```
@@ -114,3 +122,14 @@ kubectl exec -it <pod name> -- /bin/bash
 ConfigMap - https://dzone.com/articles/configuring-spring-boot-on-kubernetes-with-configm
 Secrets - https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
 https://dzone.com/articles/configuring-spring-boot-on-kubernetes-with-secrets
+
+```
+kubectl apply -f moviefun-pks-storageclass.yaml
+kubectl apply -f moviefun-pks-persistentVolumeClaim.yaml
+kubectl apply -f moviefun-pks-with-pv.yaml
+kubectl apply -f moviefun-pks-lb.yaml
+```
+Alternative to `moviefun-pks-lb.yaml`
+```
+kubectl expose deployment moviefun-pks --type LoadBalancer --port 80 --target-port=8080
+```

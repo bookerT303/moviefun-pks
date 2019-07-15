@@ -4,12 +4,10 @@ kind: Service
 metadata:
   name: moviefun-pks-lb
 spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
   selector:
     app: moviefun-pks
-  type: NodePort
-  ports:
-    - port: 80
-      nodePort: 30819
-      targetPort: 8080
-      protocol: TCP
-      name: http
+  type: LoadBalancer

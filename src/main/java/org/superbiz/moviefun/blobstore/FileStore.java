@@ -17,7 +17,7 @@ public class FileStore implements BlobStore {
     private final Tika tika = new Tika();
     private String albumRootDirectory;
 
-    public FileStore(@Value("${moviefun.storage.directory:}") String albumRootDirectory) {
+    public FileStore(String albumRootDirectory) {
         this.albumRootDirectory = albumRootDirectory;
         if (StringUtils.isNotEmpty(albumRootDirectory)) {
             new File(albumRootDirectory).mkdirs();

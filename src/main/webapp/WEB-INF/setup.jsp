@@ -95,7 +95,8 @@
 
 
   <h2>Continue</h2>
-  <a href="moviefun">Go to main app</a>
+  <p><a href="moviefun">Go to Movies</a></p>
+  <p><a href="albums">Go to Albums</a></p>
 </div>
 <!-- /container -->
 </body>

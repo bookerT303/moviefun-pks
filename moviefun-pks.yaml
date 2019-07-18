@@ -17,23 +17,8 @@ spec:
         - name: moviefun-pks
           image: pivotaleducation/moviefun-pks:2.0
           imagePullPolicy: Always
-          envFrom:
-            - configMapRef:
-                name: moviefun-pks-config
-            - secretRef:
-                name: moviefun-pks-secret
           env:
             - name: MOVIEFUN_TITLE
               value: "MyMovieFun"
-#            - name: spring.datasource.username
-#              valueFrom:
-#                secretKeyRef:
-#                  name: moviefun-pks-secret
-#                  key: spring.datasource.username
-#            - name: spring.datasource.password
-#              valueFrom:
-#                secretKeyRef:
-#                  name: moviefun-pks-secret
-#                  key: spring.datasource.password
           ports:
             - containerPort: 8080

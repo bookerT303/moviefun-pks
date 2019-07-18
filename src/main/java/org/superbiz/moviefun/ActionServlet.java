@@ -17,6 +17,8 @@
 package org.superbiz.moviefun;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -38,6 +40,8 @@ import java.util.List;
 public class ActionServlet extends HttpServlet {
 
     private static final long serialVersionUID = -5832176047021911038L;
+
+    private static final Logger logger = LoggerFactory.getLogger(ActionServlet.class);
 
     public static int PAGE_SIZE = 5;
 
@@ -62,13 +66,14 @@ public class ActionServlet extends HttpServlet {
 
         if ("Add".equals(action)) {
 
-            String title = request.getParameter("pageTitle");
+            String title = request.getParameter("title");
             String director = request.getParameter("director");
             String genre = request.getParameter("genre");
             int rating = Integer.parseInt(request.getParameter("rating"));
             int year = Integer.parseInt(request.getParameter("year"));
 
             Movie movie = new Movie(title, director, genre, rating, year);
+            logger.info("Adding Movie {}", movie);
 
             moviesBean.addMovie(movie);
             response.sendRedirect("moviefun");
@@ -77,6 +82,7 @@ public class ActionServlet extends HttpServlet {
         } else if ("Remove".equals(action)) {
 
             String[] ids = request.getParameterValues("id");
+            logger.info("Removing movies {}", ids);
             for (String id : ids) {
                 moviesBean.deleteMovieId(new Long(id));
             }
@@ -128,6 +134,7 @@ public class ActionServlet extends HttpServlet {
             }
 
             int end = start + range.size();
+            logger.info("Page {} of movies from {} to {}", page, start, end);
 
             request.setAttribute("PageTitle", pageTitle);
             request.setAttribute("count", count);

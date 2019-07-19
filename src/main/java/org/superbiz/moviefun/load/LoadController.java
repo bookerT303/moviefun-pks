@@ -15,11 +15,18 @@ public class LoadController {
     private List heldMemory = new ArrayList<>();
     private AtomicLong heldMemoryBytes = new AtomicLong(0);
 
-    @GetMapping("/memory/{size}")
-    public String memory(@PathVariable int size) {
+    @GetMapping("/memory/{requested}")
+    public String memory(@PathVariable long requested) {
+        int size = (int) requested;
+        String message = "";
+        if (requested > Integer.MAX_VALUE) {
+            size = Integer.MAX_VALUE;
+            message = String.format("Reduced requesed memory to %d, ", size);
+        }
         char[] memory = new char[size];
         heldMemory.add(memory);
-        return String.format("Holding %d total bytes of memory", heldMemoryBytes.addAndGet(size));
+        return String.format("%sHolding %d total bytes of memory",
+                message, heldMemoryBytes.addAndGet(size));
     }
 
     @GetMapping("/cpu/{count}")

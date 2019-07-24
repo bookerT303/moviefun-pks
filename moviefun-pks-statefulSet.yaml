@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: moviefun
+spec:
+  selector:
+    matchLabels:
+      app: moviefun-pks
+  serviceName: moviefun
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: moviefun-pks
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: moviefun
+        image: pivotaleducation/moviefun-pks:2.0
+        ports:
+        - containerPort: 8080
+          name: moviefun
+        volumeMounts:
+        - name: albumCovers
+          mountPath: /var/albumCovers
+  volumeClaimTemplates:
+  - metadata:
+      name: albumCovers
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: thin
+      resources:
+        requests:
+          storage: 1Gi
+

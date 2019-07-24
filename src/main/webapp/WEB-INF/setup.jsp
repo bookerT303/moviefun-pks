@@ -51,6 +51,7 @@
          data-target=".nav-collapse"> <span class="icon-bar"></span> <span
               class="icon-bar"></span> <span class="icon-bar"></span>
       </a> <a class="brand" href="#">${PageTitle}</a>
+      <div class="brand" style="float:right;">${AppVersion}</div>
       <!--/.nav-collapse -->
     </div>
   </div>

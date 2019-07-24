@@ -4,7 +4,9 @@ kind: Deployment
 metadata:
   name: moviefun-pks
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: moviefun-pks
@@ -12,10 +14,11 @@ spec:
     metadata:
       labels:
         app: moviefun-pks
+        version: v3.0
     spec:
       containers:
         - name: moviefun-pks
-          image: pivotaleducation/moviefun-pks:2.0
+          image: pivotaleducation/moviefun-pks:3.0
           imagePullPolicy: Always
           env:
             - name: MOVIEFUN_TITLE

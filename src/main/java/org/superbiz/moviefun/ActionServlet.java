@@ -50,6 +50,8 @@ public class ActionServlet extends HttpServlet {
 
     @Value("${moviefun.title:Moviefun}")
     private String pageTitle;
+    @Value("${moviefun.version:2.0}")
+    private String appVersion;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -137,6 +139,7 @@ public class ActionServlet extends HttpServlet {
             logger.info("Page {} of movies from {} to {}", page, start, end);
 
             request.setAttribute("PageTitle", pageTitle);
+            request.setAttribute("AppVersion", appVersion);
             request.setAttribute("count", count);
             request.setAttribute("start", start + 1);
             request.setAttribute("end", end);

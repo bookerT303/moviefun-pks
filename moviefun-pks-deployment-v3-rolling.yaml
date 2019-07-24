@@ -4,7 +4,12 @@ kind: Deployment
 metadata:
   name: moviefun-pks
 spec:
-  replicas: 1
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: moviefun-pks
@@ -12,10 +17,11 @@ spec:
     metadata:
       labels:
         app: moviefun-pks
+        version: v3.0
     spec:
       containers:
         - name: moviefun-pks
-          image: pivotaleducation/moviefun-pks:2.0
+          image: pivotaleducation/moviefun-pks:3.0
           imagePullPolicy: Always
           env:
             - name: MOVIEFUN_TITLE

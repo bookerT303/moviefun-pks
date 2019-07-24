@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: moviefun-pks
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: moviefun-pks
@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         app: moviefun-pks
+        version: v2.0
     spec:
       containers:
         - name: moviefun-pks

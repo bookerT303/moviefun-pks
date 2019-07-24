@@ -1,0 +1,10 @@
+http://${MOVIEFUN_IP}/moviefun
+http://${MOVIEFUN_IP}/moviefun?page=2&field=&key=
+http://${MOVIEFUN_IP}/moviefun?page=1&field=&key=
+http://${MOVIEFUN_IP}/albums
+http://${MOVIEFUN_IP}/albums/1
+http://${MOVIEFUN_IP}/albums
+http://${MOVIEFUN_IP}/load/cpu/200
+http://${MOVIEFUN_IP}/load/cpu/100
+http://${MOVIEFUN_IP}/load/cpu/spin/20
+http://${MOVIEFUN_IP}/load/cpu/spin/10

@@ -20,20 +20,24 @@ public class HomeController {
     private final MovieFixtures movieFixtures;
     private final AlbumFixtures albumFixtures;
     private String pageTitle;
+    private String appVersion;
 
     public HomeController(MoviesBean moviesBean, AlbumsBean albumsBean,
                           MovieFixtures movieFixtures, AlbumFixtures albumFixtures,
-                          @Value("${moviefun.title:Moviefun}") String pageTitle) {
+                          @Value("${moviefun.title:Moviefun}") String pageTitle,
+                          @Value("${moviefun.version:2.0}") String appVersion) {
         this.moviesBean = moviesBean;
         this.albumsBean = albumsBean;
         this.movieFixtures = movieFixtures;
         this.albumFixtures = albumFixtures;
         this.pageTitle = pageTitle;
+        this.appVersion = appVersion;
     }
 
     @GetMapping("/")
     public String index(Map<String, Object> model) {
         model.put("PageTitle", pageTitle);
+        model.put("AppVersion", appVersion);
         return "index";
     }
 
@@ -50,6 +54,7 @@ public class HomeController {
         model.put("movies", moviesBean.getMovies());
         model.put("albums", albumsBean.getAlbums());
         model.put("PageTitle", pageTitle);
+        model.put("AppVersion", appVersion);
 
         return "setup";
     }

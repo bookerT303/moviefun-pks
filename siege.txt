@@ -1,0 +1,6 @@
+http://10.195.72.128/moviefun
+http://10.195.72.128/albums
+http://10.195.72.128/load/cpu/100
+http://10.195.72.128/load/cpu/spin/20
+http://10.195.72.128/load/cpu/100
+http://10.195.72.128/load/cpu/spin/20

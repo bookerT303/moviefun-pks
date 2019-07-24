@@ -30,20 +30,23 @@ public class AlbumsController {
     private final AlbumsBean albumsBean;
     private final BlobStore blobStore;
     private String pageTitle;
+    private String appVersion;
 
     public AlbumsController(AlbumsBean albumsBean, BlobStore blobStore,
-            @Value("${moviefun.title:Moviefun}") String pageTitle) {
+            @Value("${moviefun.title:Moviefun}") String pageTitle,
+            @Value("${moviefun.version:2.0}") String appVersion) {
         this.albumsBean = albumsBean;
         this.blobStore = blobStore;
         this.pageTitle = pageTitle;
+        this.appVersion = appVersion;
     }
-
 
     @GetMapping
     public String index(Map<String, Object> model) {
         logger.info("Get list of Albums");
         model.put("albums", albumsBean.getAlbums());
         model.put("PageTitle", pageTitle);
+        model.put("AppVersion", appVersion);
         return "albums";
     }
 
@@ -52,6 +55,7 @@ public class AlbumsController {
         logger.info("Get Album details for {}", albumId);
         model.put("album", albumsBean.find(albumId));
         model.put("PageTitle", pageTitle);
+        model.put("AppVersion", appVersion);
         return "albumDetails";
     }
 

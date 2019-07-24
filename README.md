@@ -1,5 +1,17 @@
 # Movie Fun!
 
+## Build and Publish in a couple of steps
+```
+docker login
+```
+1password has the Education Dockerhub credentials
+
+```
+./do-build.sh
+```
+
+# step by step build and publish
+
 Smoke Tests require server running on port 8080 by default.
 
 ## Build WAR ignoring Smoke Tests

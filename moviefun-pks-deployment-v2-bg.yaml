@@ -2,16 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: moviefun-pks
+  name: moviefun-pks-v2
+  labels:
+    app: moviefun-pks
+    version: v2.0
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: moviefun-pks
+      version: v2.0
   template:
     metadata:
       labels:
         app: moviefun-pks
+        version: v2.0
     spec:
       containers:
         - name: moviefun-pks

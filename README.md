@@ -81,17 +81,11 @@ docker image rm pivotaleducation/moviefun-pks:2.0
 # Kubernetes
 ```
 pks login -a  https://api.pks.west.aws.pcfninja.com:9021 -u paladmin@pivotal.io -k
-```
-OR
-```
-pks login -a https://api.run.haas-208.pez.pivotal.io -k -u brad
-```
-
-```
 pks get-creditials paldemo1
 ```
 OR
 ```
+pks login -a https://api.run.haas-208.pez.pivotal.io -k -u brad
 pks get-creditials public
 ```
 
